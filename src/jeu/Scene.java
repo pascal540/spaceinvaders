@@ -3,6 +3,8 @@ package jeu;
 import javax.swing.JPanel;
 
 import entites.Vaisseau;
+import ressources.Chrono;
+import ressources.Clavier;
 import ressources.Constantes;
 
 import java.awt.Color;
@@ -19,7 +21,17 @@ public class Scene extends JPanel {
     // Constructeur
     public Scene() {
         super();
+        //Instanciation de la classe clavier
 
+        // ecoute du clavier par la classe Scene
+        this.setFocusable(true); 
+        // focus dans la fenetre du jeu pour entendre les evneemts clavier
+        this.requestFocusInWindow();
+        //instance du clavier
+        this.addKeyListener(new Clavier());
+        // Instanciation du chrono (à la fin du constructeur) pour repeindre l'ecran
+        Thread chronoEcran = new Thread(new Chrono());
+        chronoEcran.start();
     }
 
     // Methodes
@@ -34,7 +46,7 @@ public class Scene extends JPanel {
         g2.fillRect(30, 530, 535, 5);
 
         //Dessin du vaisseau
-        g2.drawImage(this.vaisseau.getimg(), this.vaisseau.getxPos(), this.vaisseau.getyPos(), null);
+        g2.drawImage(this.vaisseau.getimg(), this.vaisseau.deplacementVaisseau(), this.vaisseau.getyPos(), null);
         
 
 

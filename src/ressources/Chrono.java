@@ -17,7 +17,7 @@ public class Chrono implements Runnable {
   @Override
   public void run() {
       while (true) {
-          // appel de la methode PaintCommonent de l'objet scene
+          // appel de la methode PaintComponent de l'objet scene
           Main.scene.repaint();
           try {Thread.sleep(PAUSE);}
           catch(InterruptedException e) {}
