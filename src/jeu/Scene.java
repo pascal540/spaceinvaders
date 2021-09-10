@@ -2,6 +2,7 @@ package jeu;
 
 import javax.swing.JPanel;
 
+import entites.Vaisseau;
 import ressources.Constantes;
 
 import java.awt.Color;
@@ -11,7 +12,9 @@ import java.awt.Graphics2D;
 // creation du panneau
 
 public class Scene extends JPanel {
+    
     // variables
+    public Vaisseau vaisseau = new Vaisseau();
 
     // Constructeur
     public Scene() {
@@ -29,6 +32,9 @@ public class Scene extends JPanel {
         //dessin ligne verte en bas de l'ecran
         g2.setColor(Color.green);
         g2.fillRect(30, 530, 535, 5);
+
+        //Dessin du vaisseau
+        g2.drawImage(this.vaisseau.getimg(), this.vaisseau.getxPos(), this.vaisseau.getyPos(), null);
         
 
 
