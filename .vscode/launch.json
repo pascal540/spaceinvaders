@@ -9,6 +9,13 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "jeu.Main",
+            "projectName": "spaceinvaders_369ba6c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "jeu.Main",
             "projectName": "invaders_7988211c"
         },
         {
@@ -22,7 +29,7 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "Main",
-            "vmArgs": "--module-path d:/nous2/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /Users/User-12/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
             "projectName": "invaders_7988211c"
         }
     ]
