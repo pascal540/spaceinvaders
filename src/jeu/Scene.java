@@ -2,9 +2,11 @@ package jeu;
 
 import javax.swing.JPanel;
 
+import entites.Chateau;
 import entites.GroupeAliens;
 import entites.TirVaisseau;
 import entites.Vaisseau;
+
 import ressources.Chrono;
 import ressources.Clavier;
 import ressources.Constantes;
@@ -21,12 +23,17 @@ public class Scene extends JPanel {
     public Vaisseau vaisseau = new Vaisseau();
     public GroupeAliens groupeAliens = new GroupeAliens();
     public TirVaisseau tirVaisseau = new TirVaisseau();
+    private Chateau tabChateaux[] = new Chateau[4]; // Création d'un tableau contenant les 4 chateaux
 
     // Constructeur
     public Scene() {
         super();
+        // Instanciation des chateaux
+        for (int colonne = 0; colonne < 4; colonne++) {
+            this.tabChateaux[colonne] = new Chateau(Constantes.MARGE_FENETRE + Constantes.X_POS_INIT_CHATEAU
+                    + colonne * (Constantes.LARGEUR_CHATEAU + Constantes.ECART_CHATEAU));
+        }
         // Instanciation de la classe clavier
-
         // ecoute du clavier par la classe Scene
         this.setFocusable(true);
         // focus dans la fenetre du jeu pour entendre les evneemts clavier
@@ -59,6 +66,11 @@ public class Scene extends JPanel {
 
         // Detection contatc tirVaisseau avec alien
         this.groupeAliens.tirVaisseauToucheAlien(this.tirVaisseau);
+
+        // Dessin des chateaux
+        for (int colonne = 0; colonne < 4; colonne++) {
+            this.tabChateaux[colonne].dessinChateau(g2);
+        }
     }
 
 }

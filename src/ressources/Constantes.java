@@ -47,4 +47,17 @@ public abstract class Constantes {
     public static final int HAUTEUR_TIR_VAISSEAU = 13;
     public static final int DY_TIR_VAISSEAU = 2;
 
+    // ======================== Chateau =======================
+    // dimensions de la brique
+    public static final int DIMENSION_BRIQUE = 2;
+
+    // Dimensions du chateau (multiples des dimensions de la brique))
+    public static final int LARGEUR_CHATEAU = 72;
+    public static final int HAUTEUR_CHATEAU = 54;
+
+    // Parametres de position des chateaux
+    public static final int Y_POS_CHATEAU = 400;
+    public static final int X_POS_INIT_CHATEAU = 39;
+    public static final int ECART_CHATEAU = 42;
+
 }
