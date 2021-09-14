@@ -94,4 +94,42 @@ public class Chateau extends Entite {
             }
         }
     }
+
+    public int trouveColonneChateau(int xMissile) {
+        // Trouve la colonne du tableau associé au chateau touché par le tir
+        int colonne = -1;
+        colonne = (xMissile - this.xPos) / Constantes.DIMENSION_BRIQUE;
+        return colonne;
+
+    }
+
+    public int trouveBrique(int colonne) {
+        // Trouve la première brique en partant du bas de la colonne du tableaui associé
+        // au chateau ou renvoie -1
+        int ligne = NBRE_LIGNES - 1;
+        while (ligne >= 0 && tabChateau[ligne][colonne] == false) {
+            ligne--;
+        }
+        return ligne;
+    }
+
+    private void enleveBriques(int ligne, int colonne) {
+        // Elimination des 6 premières briques de la colonne en partant du bas si elles
+        // existent
+        for (int compteur = 0; compteur < 6; compteur++) {
+            if (ligne - compteur >= 0) {
+                tabChateau[ligne - compteur][colonne] = false;
+                if (colonne < NBRE_COLONNES - 1) {
+                    tabChateau[ligne - compteur][colonne + 1] = false;
+                }
+            }
+
+        }
+    }
+
+    public void casseBriques(int xTir) { // abscisse du tir dans xTir
+        // Récapitule les 3 méthodes qui precedent
+        int colonne = this.trouveColonneChateau(xTir);
+        this.enleveBriques(trouveBrique(colonne), colonne);
+    }
 }
