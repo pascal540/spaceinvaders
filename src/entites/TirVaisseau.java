@@ -16,7 +16,7 @@ public class TirVaisseau extends Entite {
         // Initialisation des variables de la super classe
         super.xPos = 0;
         super.yPos = Constantes.Y_POS_VAISSEAU - Constantes.HAUTEUR_TIR_VAISSEAU;
-        super.largeur = Constantes.HAUTEUR_TIR_VAISSEAU;
+        super.largeur = Constantes.LARGEUR_TIR_VAISSEAU;
         super.hauteur = Constantes.HAUTEUR_TIR_VAISSEAU;
         super.dx = 0;
         super.dy = Constantes.DY_TIR_VAISSEAU;
@@ -59,4 +59,14 @@ public class TirVaisseau extends Entite {
 
     }
 
+    public boolean tueAlien(Alien alien) {
+        // Le tir du vaisseau détruit un alien
+        if (this.yPos < alien.getyPos() + alien.gethauteur() && this.yPos + this.hauteur > alien.getyPos()
+                && this.xPos + this.largeur > alien.getxPos() && this.xPos < alien.getxPos() + alien.getlargeur()) {
+            return true; // touché !
+        }
+
+        else
+            return false;
+    }
 }

@@ -56,6 +56,9 @@ public class Scene extends JPanel {
 
         // Dessin du tir vaisseau
         this.tirVaisseau.dessinTirVaisseau(g2);
+
+        // Detection contatc tirVaisseau avec alien
+        this.groupeAliens.tirVaisseauToucheAlien(this.tirVaisseau);
     }
 
 }

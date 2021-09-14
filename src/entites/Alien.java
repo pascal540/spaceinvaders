@@ -20,7 +20,7 @@ public class Alien extends Entite {
         super.hauteur = Constantes.HAUTEUR_ALIEN;
         super.dx = 0; // depart à 0
         super.dy = 0;
-
+        super.vivant = true;
         // Adresse des images Alien
         super.strImg1 = strImg1;
         super.strImg2 = strImg2;
@@ -32,13 +32,19 @@ public class Alien extends Entite {
 
     }
 
+    // ================== Methodes ===========================
+
     public void choixImage(boolean pos1) {
         // Methode qui charge l'image de l'alien suivant sa posiiton 1 ou 2
-        if (pos1 == true) {
-            super.ico = new ImageIcon(getClass().getResource(strImg1));
-        } else {
-            super.ico = new ImageIcon(getClass().getResource(strImg2));
+        if (this.vivant == true) {
+            if (pos1 == true) {
+                super.ico = new ImageIcon(getClass().getResource(strImg1));
+            } else {
+                super.ico = new ImageIcon(getClass().getResource(strImg2));
+            }
+        } else { // Il est mort donc on le dessine entrain de mourir
+            super.ico = new ImageIcon(getClass().getResource(strImg3));
         }
-        super.img = this.ico.getImage();// recharge l'image
+        super.img = this.ico.getImage();
     }
 }

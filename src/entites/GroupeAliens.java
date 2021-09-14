@@ -14,14 +14,15 @@ public class GroupeAliens {
     private boolean vaAdroite, pos1;
     private int vitesse;
 
+    private int[] tabAlienMort = { -1, -1 };// emplacemen alien mort dans tableau aliens
+
     // =================== Constructeur =================
     public GroupeAliens() {
 
         this.initTableauAliens();
         this.vaAdroite = true; // commencea droite a udepart!
-        this.vitesse = Constantes.VITESSE_ALIEN;
         this.pos1 = true;
-
+        this.vitesse = Constantes.VITESSE_ALIEN;
     }
 
     // ================ MEthodes ===================
@@ -59,11 +60,13 @@ public class GroupeAliens {
         // Dessin des aliens contenus dans le tableau tabAlien
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                this.tabAlien[ligne][colonne].choixImage(pos1);
-                g.drawImage(this.tabAlien[ligne][colonne].getimg(), this.tabAlien[ligne][colonne].getxPos(),
-                        this.tabAlien[ligne][colonne].getyPos(), null);
-            }
 
+                if (this.tabAlien[ligne][colonne] != null) {
+                    this.tabAlien[ligne][colonne].choixImage(pos1);
+                    g.drawImage(this.tabAlien[ligne][colonne].getimg(), this.tabAlien[ligne][colonne].getxPos(),
+                            this.tabAlien[ligne][colonne].getyPos(), null);
+                }
+            }
         }
 
     }
@@ -73,9 +76,11 @@ public class GroupeAliens {
         boolean reponse = false;
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                if (this.tabAlien[ligne][colonne].getxPos() < Constantes.MARGE_FENETRE) {
-                    reponse = true;
-                    break;
+                if (this.tabAlien[ligne][colonne] != null) {
+                    if (this.tabAlien[ligne][colonne].getxPos() < Constantes.MARGE_FENETRE) {
+                        reponse = true;
+                        break;
+                    }
                 }
             }
         }
@@ -88,10 +93,12 @@ public class GroupeAliens {
         boolean reponse = false;
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                if (this.tabAlien[ligne][colonne].getxPos() > Constantes.LARGEUR_FENETRE - Constantes.LARGEUR_ALIEN
-                        - Constantes.DX_ALIEN - Constantes.MARGE_FENETRE) {
-                    reponse = true;
-                    break;
+                if (this.tabAlien[ligne][colonne] != null) {
+                    if (this.tabAlien[ligne][colonne].getxPos() > Constantes.LARGEUR_FENETRE - Constantes.LARGEUR_ALIEN
+                            - Constantes.DX_ALIEN - Constantes.MARGE_FENETRE) {
+                        reponse = true;
+                        break;
+                    }
                 }
             }
         }
@@ -104,8 +111,10 @@ public class GroupeAliens {
         if (this.toucheBordDroit() == true) {
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                    }
                 }
             }
             this.vaAdroite = false;
@@ -117,8 +126,10 @@ public class GroupeAliens {
 
                 for (int colonne = 0; colonne < 10; colonne++) {
                     for (int ligne = 0; ligne < 5; ligne++) {
-                        this.tabAlien[ligne][colonne]
-                                .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                        if (this.tabAlien[ligne][colonne] != null) {
+                            this.tabAlien[ligne][colonne]
+                                    .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                        }
                     }
                 }
                 this.vaAdroite = true;
@@ -131,22 +142,33 @@ public class GroupeAliens {
 
     public void deplacementAliens() {
         // Methode qui gere le deplacement des aliens
+        if (this.tabAlienMort[0] != -1) {
+            {// elimination de l'alien mort si necessaire
+                elimineAlienMort(tabAlienMort);
+                tabAlienMort[0] = -1;// reinitialisation de tabAlienMort
+            }
+        }
         if (this.vaAdroite == true) {// deplacement vers la droite
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setxPos(this.tabAlien[ligne][colonne].getxPos() + Constantes.DX_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setxPos(this.tabAlien[ligne][colonne].getxPos() + Constantes.DX_ALIEN);
+                    }
                 }
             }
-        } else {// deplacement vers la gauche
+        } else
+
+        {// deplacement vers la gauche
 
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setxPos(this.tabAlien[ligne][colonne].getxPos() - Constantes.DX_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setxPos(this.tabAlien[ligne][colonne].getxPos() - Constantes.DX_ALIEN);
+                    }
                 }
             }
-
         }
         // Changement de l'image de l'alien
         this.pos1 = !this.pos1;
@@ -160,4 +182,32 @@ public class GroupeAliens {
 
     }
 
+    public void tirVaisseauToucheAlien(TirVaisseau tirVaisseau) {
+        // Detecttion contact tirVaisseau avec alien
+        for (int colonne = 0; colonne < 10; colonne++) {
+            for (int ligne = 0; ligne < 5; ligne++) {
+                if (this.tabAlien[ligne][colonne] != null) {
+
+                    if (tirVaisseau.tueAlien(this.tabAlien[ligne][colonne]) == true) {
+
+                        this.tabAlien[ligne][colonne].vivant = false; // on tue l'alien
+                        tirVaisseau.yPos = -1; // on tue le tir
+                        // on enregistre la position de l'alien mort dasn le tableau
+                        this.tabAlienMort[0] = ligne;
+                        this.tabAlienMort[1] = colonne;
+                        break;
+
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+    private void elimineAlienMort(int[] tabAlienMort) {
+        // Methode qui enleve l'alien mort d utabluea (case à null)
+        this.tabAlien[tabAlienMort[0]][tabAlienMort[1]] = null;
+    }
 }

@@ -45,6 +45,6 @@ public abstract class Constantes {
     // En pixel
     public static final int LARGEUR_TIR_VAISSEAU = 3;
     public static final int HAUTEUR_TIR_VAISSEAU = 13;
-    public final static int DY_TIR_VAISSEAU = 2;
+    public static final int DY_TIR_VAISSEAU = 2;
 
 }
