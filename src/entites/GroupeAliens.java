@@ -149,11 +149,12 @@ public class GroupeAliens {
 
         }
         // Changement de l'image de l'alien
-        if (this.pos1 == true) {
-            this.pos1 = false;
-        } else {
-            this.pos1 = true;
-        }
+        this.pos1 = !this.pos1;
+        // if (this.pos1 == true) {
+        // this.pos1 = false;
+        // } else {
+        // this.pos1 = true;
+        // }
         // maj du sens de deplacement si un alien atteint le bord de la fenetre
         this.alienTourneEtDescend();
 

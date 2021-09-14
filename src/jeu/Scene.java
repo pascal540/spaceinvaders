@@ -3,6 +3,7 @@ package jeu;
 import javax.swing.JPanel;
 
 import entites.GroupeAliens;
+import entites.TirVaisseau;
 import entites.Vaisseau;
 import ressources.Chrono;
 import ressources.Clavier;
@@ -19,6 +20,7 @@ public class Scene extends JPanel {
     // variables
     public Vaisseau vaisseau = new Vaisseau();
     public GroupeAliens groupeAliens = new GroupeAliens();
+    public TirVaisseau tirVaisseau = new TirVaisseau();
 
     // Constructeur
     public Scene() {
@@ -51,6 +53,9 @@ public class Scene extends JPanel {
         this.vaisseau.dessinVaisseau(g2);
         // Dessin des aliens
         this.groupeAliens.dessinAliens(g2);
+
+        // Dessin du tir vaisseau
+        this.tirVaisseau.dessinTirVaisseau(g2);
     }
 
 }
