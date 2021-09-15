@@ -8,14 +8,11 @@ import entites.Soucoupe;
 import entites.TirAlien;
 import entites.TirVaisseau;
 import entites.Vaisseau;
-
 import ressources.Chrono;
 import ressources.Clavier;
 import ressources.Constantes;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 // creation du panneau
 
@@ -28,6 +25,11 @@ public class Scene extends JPanel {
     public Chateau tabChateaux[] = new Chateau[4]; // Création d'un tableau contenant les 4 chateaux
     public TirAlien tirAlien1, tirAlien2, tirAlien3;
     public Soucoupe soucoupe;
+
+    private Font afficheScore = new Font("Arial", Font.PLAIN, 20);
+    private Font afficheTexte = new Font("Arial", Font.PLAIN, 80);
+
+    public int score = 0;
 
     // Constructeur
     public Scene() {
@@ -60,6 +62,10 @@ public class Scene extends JPanel {
         g2.setColor(Color.green);
         g2.fillRect(30, 530, 535, 5);
 
+        // Affichage du score
+        g.setFont(afficheScore);
+        g.drawString("SCORE : " + score, 400, 25);
+
         // Dessin du vaisseau
         this.vaisseau.dessinVaisseau(g2);
         // Dessin des aliens
@@ -74,6 +80,12 @@ public class Scene extends JPanel {
         // Dessin des chateaux
         for (int colonne = 0; colonne < 4; colonne++) {
             this.tabChateaux[colonne].dessinChateau(g2);
+        }
+
+        // Message de bienvenue
+        if (Chrono.compteTours < 500) {
+            g.setFont(afficheTexte);
+            g.drawString("Good luck   ! ", 95, 100);
         }
 
         // Detection contact tirVaisseau avec chateau
@@ -121,6 +133,9 @@ public class Scene extends JPanel {
             if (this.soucoupe.getxPos() > 0) {
                 // Detection contact tir vaisseau avec soucoupe
                 if (this.tirVaisseau.detruitSoucoupe(this.soucoupe) == true) {
+                    if (this.soucoupe.getdx() != 0) {
+                        this.score += Constantes.VALEUR_SOUCOUPE;
+                    }
                     this.soucoupe.setdx(0);
                     this.soucoupe.setvivant(false);
                     this.soucoupe.musiqueSoucoupe.stop();
@@ -130,8 +145,13 @@ public class Scene extends JPanel {
                 this.soucoupe.dessinSoucoupe(g2);
             } else {
                 this.soucoupe = null;
-            }
 
+            }
+        }
+        // Message de la fin du jeu
+        if (!this.vaisseau.isVivant()) {
+            g.setFont(afficheTexte);
+            g.drawString("GAME OVER  ! ", 50, 100);
         }
 
     }

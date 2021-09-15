@@ -6,6 +6,8 @@ import ressources.Constantes;
 import java.awt.*;
 import java.util.Random;
 
+import jeu.Main;
+
 public class GroupeAliens {
 
     // Variables
@@ -205,6 +207,14 @@ public class GroupeAliens {
                         // on enregistre la position de l'alien mort dasn le tableau
                         this.tabAlienMort[0] = ligne;
                         this.tabAlienMort[1] = colonne;
+
+                        if (ligne == 0) {
+                            Main.scene.score = Main.scene.score + Constantes.VALEUR_ALIEN_HAUT;
+                        } else if (ligne > 0 && ligne < 3) {
+                            Main.scene.score = Main.scene.score + Constantes.VALEUR_ALIEN_MILIEU;
+                        } else {
+                            Main.scene.score = Main.scene.score + Constantes.VALEUR_ALIEN_BAS;
+                        }
                         break;
 
                     }
