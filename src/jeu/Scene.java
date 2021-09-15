@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import entites.Chateau;
 import entites.GroupeAliens;
+import entites.Soucoupe;
 import entites.TirAlien;
 import entites.TirVaisseau;
 import entites.Vaisseau;
@@ -26,6 +27,7 @@ public class Scene extends JPanel {
     public TirVaisseau tirVaisseau = new TirVaisseau();
     public Chateau tabChateaux[] = new Chateau[4]; // Création d'un tableau contenant les 4 chateaux
     public TirAlien tirAlien1, tirAlien2, tirAlien3;
+    public Soucoupe soucoupe;
 
     // Constructeur
     public Scene() {
@@ -111,7 +113,26 @@ public class Scene extends JPanel {
                 this.vaisseau.setvivant((false));
             }
         }
+        // Dessin de la soucoupe
+        if (Chrono.compteTours % 2500 == 0) {
+            soucoupe = new Soucoupe();
+        }
+        if (this.soucoupe != null) {
+            if (this.soucoupe.getxPos() > 0) {
+                // Detection contact tir vaisseau avec soucoupe
+                if (this.tirVaisseau.detruitSoucoupe(this.soucoupe) == true) {
+                    this.soucoupe.setdx(0);
+                    this.soucoupe.setvivant(false);
+                    this.soucoupe.musiqueSoucoupe.stop();
+                    this.soucoupe.musiqueDestructionSoucoupe.play();
+                }
+
+                this.soucoupe.dessinSoucoupe(g2);
+            } else {
+                this.soucoupe = null;
+            }
+
+        }
 
     }
-
 }

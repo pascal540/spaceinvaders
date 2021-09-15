@@ -70,4 +70,16 @@ public abstract class Constantes {
     // Nombre total d'aliens
     public static final int NOMBRE_ALIENS = 50;
 
+    // ======================= SOUCOUPE =========================
+
+    // ========== Dimensions de la soucoupe ==============
+    public static final int LARGEUR_SOUCOUPE = 42;
+    public static final int HAUTEUR_SOUCOUPE = 22;
+
+    // =========== Position initale de la soucoupe ================
+    public static final int X_POS_INIT_SOUCOUPE = LARGEUR_FENETRE;
+    public static final int Y_POS_SOUCOUPE = 50;
+
+    // ============ Unite de deplacement de la soucoupe
+    public static final int DX_SOUCOUPE = 1;
 }
