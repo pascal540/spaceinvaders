@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import jeu.Main;
 import ressources.Constantes;
 import java.awt.*;
+import ressources.Audio;
 
 public class TirVaisseau extends Entite {
     // tir coup par coup et non pas en rafale
@@ -64,6 +65,8 @@ public class TirVaisseau extends Entite {
         // Le tir du vaisseau détruit un alien
         if (this.yPos < alien.getyPos() + alien.gethauteur() && this.yPos + this.hauteur > alien.getyPos()
                 && this.xPos + this.largeur > alien.getxPos() && this.xPos < alien.getxPos() + alien.getlargeur()) {
+            Audio.playSound("/sons/sonAlienMeurt.wav"); // Pas besoin de creer d'instance, c'est un son tres
+            // court ! on ne peut arretr ce son
             return true; // touché !
         }
 

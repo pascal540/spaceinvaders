@@ -21,6 +21,8 @@ public class Clavier implements KeyListener {
                 Main.scene.vaisseau.setdx(-Constantes.DX_VAISSEAU);
             } else if (e.getKeyCode() == 32) {
                 if (Main.scene.tirVaisseau.isVaisseauTire() == false) {
+                    Audio.playSound("/sons/sonTirVaisseau.wav"); // Pas besoin de creer d'instance, c'est un son tres
+                                                                 // court ! on ne peut arretr ce son
                     Main.scene.tirVaisseau.setyPos(Constantes.Y_POS_VAISSEAU - Constantes.HAUTEUR_TIR_VAISSEAU);
                     Main.scene.tirVaisseau.setxPos(Main.scene.vaisseau.getxPos() + Constantes.LARGEUR_VAISSEAU / 2 - 1);
                     Main.scene.tirVaisseau.setVaisseauTire(true);

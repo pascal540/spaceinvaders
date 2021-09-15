@@ -1,5 +1,6 @@
 package entites;
 
+import ressources.Audio;
 import ressources.Chrono;
 import ressources.Constantes;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class GroupeAliens {
     Random hasard = new Random();
 
     private int nombreAliens = Constantes.NOMBRE_ALIENS;
+    private int compteurSonAlien = 0;
 
     // =================== Constructeur =================
     public GroupeAliens() {
@@ -174,6 +176,10 @@ public class GroupeAliens {
                 }
             }
         }
+        // Les aliens emettent un son
+        this.joueSonALien();
+        // Incrementation du compteur d eson
+        this.compteurSonAlien++;
         // Changement de l'image de l'alien
         this.pos1 = !this.pos1;
         // if (this.pos1 == true) {
@@ -237,4 +243,16 @@ public class GroupeAliens {
         return positionAlien;
     }
 
+    public void joueSonALien() { // Methode qui joue le son de l'alien (4 sons possibles)
+        int compteur = this.compteurSonAlien % 4;
+        if (compteur == 0) {
+            Audio.playSound("/sons/sonAlien1.wav");
+        } else if (compteur == 1) {
+            Audio.playSound("/sons/sonAlien2.wav");
+        } else if (compteur == 2) {
+            Audio.playSound("/sons/sonAlien3.wav");
+        } else {
+            Audio.playSound("/sons/sonAlien4.wav");
+        }
+    }
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import ressources.Constantes;
+import ressources.Audio;
 
 public class Chateau extends Entite {
     // ================== VARIABLES ====================
@@ -129,6 +130,8 @@ public class Chateau extends Entite {
 
     public void casseBriques(int xTir) { // abscisse du tir dans xTir
         // Récapitule les 3 méthodes qui precedent
+        Audio.playSound("/sons/sonCasseBrique.wav"); // Pas besoin de creer d'instance, c'est un son tres
+        // court ! on ne peut arretr ce son
         int colonne = this.trouveColonneChateau(xTir);
         this.enleveBriques(trouveBrique(colonne), colonne);
     }
@@ -160,6 +163,8 @@ public class Chateau extends Entite {
 
     public void casseBriqueshaut(int xTir) { // abscisse du tir de l'alien
         // Récapitule les 2 méthodes qui precedent
+        Audio.playSound("/sons/sonCasseBrique.wav"); // Pas besoin de creer d'instance, c'est un son tres
+        // court ! on ne peut arretr ce son
         int colonne = this.trouveColonneChateau(xTir);
         this.enleveBriquesHaut(trouveBriqueHaut(colonne), colonne);
     }
