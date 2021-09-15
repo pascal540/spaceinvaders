@@ -132,4 +132,36 @@ public class Chateau extends Entite {
         int colonne = this.trouveColonneChateau(xTir);
         this.enleveBriques(trouveBrique(colonne), colonne);
     }
+
+    public int trouveBriqueHaut(int colonne) {
+        // Trouve la première brique en partant du haut de la colonne du tableau
+        // associé au chateua renvoie -1
+        int ligne = 0;
+        if (colonne != -1) { // A T on une colonne selectionnée ?
+            while (ligne < NBRE_LIGNES && tabChateau[ligne][colonne] == false) {
+                ligne++;
+            }
+        }
+        return ligne;
+    }
+
+    private void enleveBriquesHaut(int ligne, int colonne) {
+        // Elimination des 6 premières briques de la colonne en partant du haut
+        // si elels existent
+        for (int compteur = 0; compteur < 6; compteur++) {
+            if (ligne + compteur < NBRE_LIGNES && colonne != -1) {
+                tabChateau[ligne + compteur][colonne] = false;
+                if (colonne < NBRE_COLONNES - 1) {
+                    tabChateau[ligne + compteur][colonne + 1] = false;
+                }
+            }
+        }
+    }
+
+    public void casseBriqueshaut(int xTir) { // abscisse du tir de l'alien
+        // Récapitule les 2 méthodes qui precedent
+        int colonne = this.trouveColonneChateau(xTir);
+        this.enleveBriquesHaut(trouveBriqueHaut(colonne), colonne);
+    }
+
 }

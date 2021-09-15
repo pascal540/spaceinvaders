@@ -2,7 +2,7 @@ package ressources;
 
 import java.awt.event.*;
 
-import javafx.scene.input.KeyEvent;
+// import javafx.scene.input.KeyEvent;
 import jeu.Main;
 
 public class Clavier implements KeyListener {
@@ -15,9 +15,9 @@ public class Clavier implements KeyListener {
     @Override
     public void keyPressed(java.awt.event.KeyEvent e) {
 
-        if (e.getKeyCode() == 68) { // touche D (droite)
+        if (e.getKeyCode() == 39) { // touche D (droite)
             Main.scene.vaisseau.setdx(Constantes.DX_VAISSEAU);
-        } else if (e.getKeyCode() == 81) {// touche Q (gauche)
+        } else if (e.getKeyCode() == 37) {// touche Q (gauche)
             Main.scene.vaisseau.setdx(-Constantes.DX_VAISSEAU);
         } else if (e.getKeyCode() == 32) {
             if (Main.scene.tirVaisseau.isVaisseauTire() == false) {
