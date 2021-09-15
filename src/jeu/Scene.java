@@ -84,7 +84,10 @@ public class Scene extends JPanel {
         if (this.tirAlien1 != null) {
             this.tirAlien1.dessinTirAlien(g2);
             this.tirAlien1.TirAlienDetruitChateau(tabChateaux);// Detection contact
-            // tirAlien1 avec chateau
+            if (this.tirAlien1.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setvivant((false));
+            }
+
         }
 
         if (Chrono.compteTours % 750 == 0) {
@@ -93,7 +96,9 @@ public class Scene extends JPanel {
         if (this.tirAlien2 != null) {
             this.tirAlien2.dessinTirAlien(g2);
             this.tirAlien2.TirAlienDetruitChateau(tabChateaux);// Detection contact
-            // tirAlien1 avec chateau
+            if (this.tirAlien2.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setvivant((false));
+            }
         }
 
         if (Chrono.compteTours % 900 == 0) {
@@ -102,7 +107,9 @@ public class Scene extends JPanel {
         if (this.tirAlien3 != null) {
             this.tirAlien3.dessinTirAlien(g2);
             this.tirAlien3.TirAlienDetruitChateau(tabChateaux);// Detection contact
-            // tirAlien1 avec chateau
+            if (this.tirAlien3.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setvivant((false));
+            }
         }
 
     }
