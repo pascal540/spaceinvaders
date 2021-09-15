@@ -3,6 +3,7 @@ package entites;
 import ressources.Chrono;
 import ressources.Constantes;
 import java.awt.*;
+import java.util.Random;
 
 public class GroupeAliens {
 
@@ -15,6 +16,9 @@ public class GroupeAliens {
     private int vitesse;
 
     private int[] tabAlienMort = { -1, -1 };// emplacemen alien mort dans tableau aliens
+    Random hasard = new Random();
+
+    private int nombreAliens = Constantes.NOMBRE_ALIENS;
 
     // =================== Constructeur =================
     public GroupeAliens() {
@@ -209,5 +213,28 @@ public class GroupeAliens {
     private void elimineAlienMort(int[] tabAlienMort) {
         // Methode qui enleve l'alien mort d utabluea (case à null)
         this.tabAlien[tabAlienMort[0]][tabAlienMort[1]] = null;
+        this.nombreAliens--;
     }
+
+    public int[] choixAlienQuiTire() {
+        // Renvoie la posiiton d'un alien tiré au hasard dans tabAlien en bas de sa
+        // colonne(ligne,colonne)
+        int positionAlien[] = { -1, -1 };
+        if (this.nombreAliens != 0) { // On verifie qu'il reste des aliens vivants
+
+            do {
+                int colonne = hasard.nextInt(10);// On tire au hasard une colonne du tableau des aliens
+                for (int ligne = 4; ligne >= 0; ligne--) { // on cherche le premier alien vivant en partant du bas
+                    if (tabAlien[ligne][colonne] != null) {
+                        positionAlien[0] = this.tabAlien[ligne][colonne].getxPos();
+                        positionAlien[1] = this.tabAlien[ligne][colonne].getyPos();
+                        break;
+                    }
+                }
+
+            } while (positionAlien[0] == -1);
+        }
+        return positionAlien;
+    }
+
 }

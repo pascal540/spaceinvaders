@@ -60,4 +60,14 @@ public abstract class Constantes {
     public static final int X_POS_INIT_CHATEAU = 39;
     public static final int ECART_CHATEAU = 42;
 
+    // ======================= Tir alien ============================
+    // Dimension du tir
+    public static final int LARGEUR_TIR_ALIEN = 5;
+    public static final int HAUTEUR_TIR_ALIEN = 15;
+
+    // Unité de déplacement du tir
+    public static final int DY_TIR_ALIEN = 3;
+    // Nombre total d'aliens
+    public static final int NOMBRE_ALIENS = 50;
+
 }
